@@ -11,7 +11,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Route to render the main page
+
 app.get("/", async (req, res) => {
   try {
     const response = await axios.get(`${API_URL}/posts`);
@@ -22,7 +22,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Route to render the edit page
 app.get("/new", (req, res) => {
   res.render("modify.ejs", { heading: "New Post", submit: "Create Post" });
 });
@@ -41,7 +40,7 @@ app.get("/edit/:id", async (req, res) => {
   }
 });
 
-// Create a new post
+
 app.post("/api/posts", async (req, res) => {
   try {
     const response = await axios.post(`${API_URL}/posts`, req.body);
@@ -52,7 +51,6 @@ app.post("/api/posts", async (req, res) => {
   }
 });
 
-// Partially update a post
 app.post("/api/posts/:id", async (req, res) => {
   console.log("called");
   try {
@@ -67,7 +65,6 @@ app.post("/api/posts/:id", async (req, res) => {
   }
 });
 
-// Delete a post
 app.get("/api/posts/delete/:id", async (req, res) => {
   try {
     await axios.delete(`${API_URL}/posts/${req.params.id}`);
